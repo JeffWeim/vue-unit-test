@@ -5,13 +5,13 @@ const compInstance = new Vue(Hello)
 
 describe('Hello.vue', () => {
 
-  beforeEach(function() {
+  beforeEach(() => {
     sinon.spy(compInstance, 'anotherMethod')
 
     compInstance.increase()
   })
 
-  afterEach(function() {
+  afterEach(() => {
     compInstance.anotherMethod.restore()
   })
 

@@ -2,16 +2,16 @@ import Vue from 'vue'
 import ContactForm from 'src/components/ContactForm'
 import axios from 'axios'
 
-const appInstance = new Vue(ContactForm)
+const compInstance = new Vue(ContactForm)
 
 describe('ContactForm.vue', () => {
   let promiseCall
 
-  before(function () {
+  before(() => {
     promiseCall = sinon.stub(axios, 'get').returnsPromise()
   })
 
-  after(function () {
+  after(() => {
     axios.get.restore()
   })
 
@@ -24,7 +24,7 @@ describe('ContactForm.vue', () => {
   })
 
   it('should contain proper methods', function (done) {
-    expect(typeof appInstance.helloCall).to.be.equal('function')
+    expect(typeof compInstance.helloCall).to.be.equal('function')
 
     done()
   })
@@ -37,9 +37,9 @@ describe('ContactForm.vue', () => {
       }
     })
 
-    appInstance.helloCall()
+    compInstance.helloCall()
 
-    expect(appInstance.api).to.be.equal('Hello from the API enpoint!')
+    expect(compInstance.api).to.be.equal('Hello from the API enpoint!')
 
     done()
   })
