@@ -1,5 +1,6 @@
 var path = require('path');
 var projectRoot = path.resolve(__dirname, '../');
+var utils = require('./utils');
 
 module.exports = {
   entry: {
@@ -21,14 +22,29 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue'
-    }, {
-      test: /\.js$/,
-      loader: 'babel',
-      include: projectRoot,
-      exclude: /node_modules/
-    }]
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: 'vue'
+      },
+      {
+        test: /\.scss$/,
+        loaders: [ "style", "css", "sass", "scss" ]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        include: projectRoot,
+        exclude: /node_modules/
+      }
+    ]
+  },
+  vue: {
+    loaders: utils.cssLoaders(),
+    postcss: [
+      require('autoprefixer')({
+        browsers: ['last 2 versions']
+      })
+    ]
   }
 }

@@ -7,12 +7,16 @@ describe('Hello.vue', () => {
 
   beforeEach(() => {
     sinon.spy(compInstance, 'anotherMethod')
-
     compInstance.increase()
+
+    sinon.spy(console, 'log')
+
+    compInstance.$options.mounted[0]()
   })
 
   afterEach(() => {
     compInstance.anotherMethod.restore()
+    console.log.restore()
   })
 
   it('should render correct contents', () => {
@@ -21,12 +25,16 @@ describe('Hello.vue', () => {
       render: (h) => h(Hello)
     })
 
-    expect(vm.$el.querySelector('.hello h1').textContent).to.be.equal('Welcome to Your Vue.js App')
+    expect(vm.$el.querySelector('.hello h1').textContent).to.be.equal('Vue Unit Testing')
   })
 
   it('has a ready hook', () => {
-    expect(typeof Hello.ready).to.be.equal('function')
+    expect(typeof Hello.mounted).to.be.equal('function')
   })
+
+  it('has a ready hook that console.log\s a message', () => {
+    expect(console.log).to.have.been.calledWith('ready!')
+  });
 
   it('increases correcty', () => {
     compInstance.val = 0

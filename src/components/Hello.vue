@@ -17,7 +17,7 @@
     },
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App',
+        msg: 'Vue Unit Testing',
         val: 0
       }
     },
@@ -25,15 +25,11 @@
       increase() {
         this.val += 1
 
-        // console.log('we\'re in increase!');
-
         this.anotherMethod()
       },
-      anotherMethod() {
-        // console.log('we\'re in another method!');
-      }
+      anotherMethod() {}
     },
-    ready() {
+    mounted() {
       console.log('ready!')
     }
   }

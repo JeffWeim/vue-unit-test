@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var baseWebpackConfig = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var utils = require('./utils');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -12,6 +13,9 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 module.exports = merge(baseWebpackConfig, {
   entry: {
     app: './src/main.js'
+  },
+  module: {
+    loaders: utils.styleLoaders({ sourceMap: false })
   },
   devtool: '#eval-source-map',
   plugins: [

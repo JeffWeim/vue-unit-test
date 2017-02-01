@@ -29,10 +29,10 @@ describe('ContactForm.vue', () => {
     done()
   })
 
-  // https://github.com/substantial/sinon-stub-promise
   it('helloCall should set proper data from AJAX response [success]', function (done) {
     promiseCall.resolves({
       data: {
+        'statusCode': 200,
         msg: 'Hello from the API enpoint!'
       }
     })
@@ -40,6 +40,21 @@ describe('ContactForm.vue', () => {
     compInstance.helloCall()
 
     expect(compInstance.api).to.be.equal('Hello from the API enpoint!')
+
+    done()
+  })
+
+  it('helloCall should set proper data from AJAX response [fail]', function (done) {
+    promiseCall.rejects({
+      data: {
+        'statusCode': 400,
+        'error': 'Bad Request',
+        'message': 'invalid query'
+      }
+    })
+    compInstance.helloCall()
+
+    expect(compInstance.error).to.be.not.empty
 
     done()
   })
