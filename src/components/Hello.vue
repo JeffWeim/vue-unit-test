@@ -27,10 +27,10 @@
 
         this.anotherMethod()
       },
-      anotherMethod() {}
+      anotherMethod(word) {}
     },
     mounted() {
-      console.log('ready!')
+      this.anotherMethod('wow')
     }
   }
 </script>
