@@ -4,16 +4,20 @@
 
     <contact-form></contact-form>
 
+    <information></information>
+
   </div>
 </template>
 
 <script>
   import ContactForm from './ContactForm'
+  import Information from './Information'
 
   export default {
     name: 'Hello',
     components: {
-      ContactForm
+      ContactForm,
+      Information
     },
     data() {
       return {
@@ -35,8 +39,6 @@
   }
 </script>
 
-<style scoped>
-  .hello {
-    color: #42b983;
-  }
+<style lang="scss">
+  @import '../styles/hello';
 </style>

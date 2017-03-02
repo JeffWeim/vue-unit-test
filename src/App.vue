@@ -17,5 +17,4 @@
 
 <style lang="scss">
   @import './styles/base'
-
 </style>

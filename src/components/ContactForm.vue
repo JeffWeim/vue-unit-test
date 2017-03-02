@@ -4,18 +4,18 @@
       <label class="form__label">Name</label>
       <input class="form__input" v-model.trim="name" @input="$v.name.$touch()">
     </div>
-    <span class="form-group__message" v-if="!$v.name.required">Field is required</span>
-    <span class="form-group__message" v-if="!$v.name.minLength">Name must be longer than 3 letters.</span>
+    <span class="form-group__error" v-if="!$v.name.required">Field is required</span>
+    <span class="form-group__error" v-if="!$v.name.minLength">Name must be longer than 3 letters.</span>
 
     <div class="form-group" v-bind:class="{ 'form-group--error': $v.age.$error }">
       <label class="form__label">Age</label>
       <input class="form__input" v-model.trim="age" @blur="$v.age.$touch()">
     </div>
-    <span class="form-group__message" v-if="!$v.age.between">Must be between 20 and 30</span>
+    <span class="form-group__error" v-if="!$v.age.between">Must be between 20 and 30</span>
 
     <p>API message: {{ api }} </p>
 
-    <button type="submit" @click.prevent="submitForm">Submit</button>
+    <button type="submit" @click.prevent="helloCall">Submit</button>
   </form>
 </template>
 
@@ -56,10 +56,6 @@
   }
 </script>
 
-<style scoped>
-  .form-group {
-    &--error {
-      color: red;
-    }
-  }
+<style lang="scss">
+  @import '../styles/base'
 </style>
