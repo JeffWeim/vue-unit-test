@@ -21,7 +21,7 @@ var webpackConfig = merge(baseConfig, {
       },
       {
         test: /\.scss$/,
-        loaders: [ "scss" ]
+        loaders: [ "scss", "sass" ]
       }
     ]
   },
@@ -33,8 +33,8 @@ var webpackConfig = merge(baseConfig, {
     }),
     new Dotenv({
       path: './.env'
-    }),
-    new FriendlyErrorsPlugin()
+    })
+    // new FriendlyErrorsPlugin()
   ]
 })
 
