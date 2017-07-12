@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import ContactForm from '@/components/ContactForm'
 import axios from 'axios'
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
 
 const compInstance = new Vue(ContactForm)
 
