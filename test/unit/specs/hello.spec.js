@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Hello from 'src/components/Hello'
+import Hello from '@/components/Hello'
 
 const compInstance = new Vue(Hello)
 Vue.config.silent = true

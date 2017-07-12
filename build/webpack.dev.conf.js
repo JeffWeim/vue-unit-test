@@ -1,34 +1,43 @@
-var path = require('path');
-var webpack = require('webpack');
-var merge = require('webpack-merge');
-var baseWebpackConfig = require('./webpack.base.conf');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var utils = require('./utils');
+var utils = require('./utils')
+var webpack = require('webpack')
+var config = require('../config')
+var merge = require('webpack-merge')
+var baseWebpackConfig = require('./webpack.base.conf')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var dotenv = require('dotenv').config()
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
+  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
 module.exports = merge(baseWebpackConfig, {
-  entry: {
-    app: './src/main.js'
-  },
   module: {
-    loaders: utils.styleLoaders({ sourceMap: false })
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
-  devtool: '#eval-source-map',
+  // cheap-module-eval-source-map is faster for development
+  devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
-        'process.env': "'development'"
+        'process.env': {
+        'NODE_ENV': config.dev.env,
+        'API_URL': JSON.stringify('http://localhost:3000'),
+        'GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY),
+        'INSTA_ACCESS_TOKEN': JSON.stringify(process.env.INSTA_ACCESS_TOKEN),
+        'INSTA_USER_ID': JSON.stringify(process.env.INSTA_USER_ID),
+        'CONTENTFUL_ACCESS_TOKEN': JSON.stringify(process.env.CONTENTFUL_ACCESS_TOKEN)
+      }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       inject: true
-    })
+    }),
+    new FriendlyErrorsPlugin()
   ]
-});
+})

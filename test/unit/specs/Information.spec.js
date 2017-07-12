@@ -2,7 +2,7 @@ import Vue from 'vue'
 // import { mount } from 'avoriaz';
 import { mount } from 'avoriaz'
 import  * as utility from '../utility'
-import Information from 'src/components/Information'
+import Information from '@/components/Information'
 
 describe('Information.vue', () => {
   // it('renders a div with class information', () => {

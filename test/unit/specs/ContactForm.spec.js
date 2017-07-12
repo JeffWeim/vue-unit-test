@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ContactForm from 'src/components/ContactForm'
+import ContactForm from '@/components/ContactForm'
 import axios from 'axios'
 
 const compInstance = new Vue(ContactForm)
