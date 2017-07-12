@@ -1,7 +1,9 @@
 import Vue from 'vue'
+import { mount } from 'avoriaz'
 import Hello from '@/components/Hello'
 
 const compInstance = new Vue(Hello)
+const wrapper = mount(Hello)
 Vue.config.silent = true
 
 describe('Hello.vue', () => {
@@ -35,7 +37,7 @@ describe('Hello.vue', () => {
 
   it('has a mounted hook that calls anotherMethod()', () => {
     expect(compInstance.anotherMethod).to.have.been.calledWith('wow')
-  });
+  })
 
   it('increases correcty', () => {
     expect(compInstance.val).to.be.equal(0)
@@ -49,4 +51,18 @@ describe('Hello.vue', () => {
     expect(compInstance.anotherMethod).to.have.been.called
   })
 
+  it('should have 2 child components', function() {
+    expect(wrapper.vm.$children.length).to.equal(2)
+  })
+
+  it('should have 2 child components that are named', function() {
+    const mock = [
+      'Form',
+      'Information'
+    ]
+
+    wrapper.vm.$children.forEach((e, i) => {
+      expect(wrapper.vm.$children[i].$options.name).to.equal(mock[i])
+    })
+  })
 })

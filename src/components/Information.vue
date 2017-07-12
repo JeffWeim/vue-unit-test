@@ -7,6 +7,7 @@
 
 <script>
   export default {
+    name: 'Information',
     data() {
       return {
         title: 'Welcome to the information section.',

@@ -32,7 +32,7 @@ describe('ContactForm.vue', () => {
     done()
   })
 
-  it('helloCall should set proper data from AJAX response [success]', function (done) {
+  it('helloCall should set proper data from AJAX response [SUCCESS]', function (done) {
     promiseCall.resolves({
       data: {
         'statusCode': 200,
@@ -47,7 +47,7 @@ describe('ContactForm.vue', () => {
     done()
   })
 
-  it('helloCall should set proper data from AJAX response [fail]', function (done) {
+  it('helloCall should set proper data from AJAX response [FAIL]', function (done) {
     promiseCall.rejects({
       data: {
         'statusCode': 400,
